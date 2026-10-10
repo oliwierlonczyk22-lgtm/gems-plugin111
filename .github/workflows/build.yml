@@ -11,10 +11,9 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-          cache: maven
-            - run: mvn -B package
-        working-directory: GemPlugin
+      - name: Build
+        run: mvn -B package -f "$(find . -name pom.xml | head -n 1)"
       - uses: actions/upload-artifact@v4
         with:
           name: GemPlugin
-          path: GemPlugin/target/*.jar
+          path: "**/target/GemPlugin-*.jar"
